@@ -15,10 +15,12 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 const tags = await getTags();
+const name = tags.contents.find(t => t.id === tag)?.name;
 const blogs = await getBlogs({ filters:  "tags[contains]" + tag });
 ---
 
-<Layout pageTitle={tag}>
-	<LinkedTaglist tags={tags.contents} mark={tag}/>
+<Layout pageTitle={name} noContentClass={true}>
+	<div class="content"><h1>{name}</h1></div>
+	<LinkedTaglist tags={tags.contents}/>
 	<Blogs blog={blogs.contents}/>
 </Layout>

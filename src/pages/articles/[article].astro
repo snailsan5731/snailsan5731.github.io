@@ -66,7 +66,7 @@ $("pre code").each((_, elm) => {
 blog.content = $.root().html() ?? '';
 ---
 
-<Layout pageTitle={blog.title}>
+<Layout pageTitle={blog.title} noContentClass={true}>
 	<div class="meta">
 		<h1>{blog.title}</h1>
 		<h2>{blog.description}</h2>
@@ -76,5 +76,5 @@ blog.content = $.root().html() ?? '';
 		{blog.bumper?.url && <img src={blog.bumper.url} alt={blog.bumper.alt}/>}
 	</div>
 	<hr/>
-	<div class="content" set:html={blog.content}></div>
+	<div class="content" set:html={blog.content}/>
 </Layout>

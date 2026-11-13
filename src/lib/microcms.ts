@@ -12,7 +12,7 @@ export type Information = {
 
 export type Tag = {
   name: string;
-} & MicroCMSContentId;;
+} & MicroCMSContentId;
 
 export type Blog = {
   id: string;
@@ -22,6 +22,14 @@ export type Blog = {
   content: string;
   tags: Tag[];
 } & MicroCMSListContent;
+
+export type Link = {
+  icon: MicroCMSImage;
+  url: string;
+  name: string;
+  description: string;
+  isMutualLink: boolean;
+};
 
 export const getBlogs = async (queries?: MicroCMSQueries) => {
   return await client.getList<Blog>({ endpoint: "articles", queries });
@@ -37,6 +45,10 @@ export const getBlogDetail = async (contentId: string, queries?: MicroCMSQueries
 
 export const getTags = async (queries?: MicroCMSQueries) => {
   return await client.getList<Tag>({ endpoint: "tags", queries });
+};
+
+export const getLinks = async (queries?: MicroCMSQueries) => {
+  return await client.getList<Link>({ endpoint: "links", queries });
 };
 
 export const get = async (id: string, queries?: MicroCMSQueries) => {

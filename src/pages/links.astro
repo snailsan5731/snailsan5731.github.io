@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Links from '../components/Links.astro';
+
+import type { Link } from "../lib/microcms.ts";
+import { getLinks } from '../lib/microcms.ts';
+
+const pageTitle = "Links";
+
+const links = await getLinks();
+let ownLinks: Link[] = [], mutualLinks: Link[] = [];
+
+links.contents.forEach(link => {
+    if (link.isMutualLink) mutualLinks.push(link);
+    else ownLinks.push(link);
+});
+---
+
+<Layout pageTitle={pageTitle}>
+    {ownLinks.length > 0 && <h1>リンク</h1>}
+    <Links links={ownLinks}/>
+    {mutualLinks.length > 0 && <h1>相互リンク</h1>}
+    <Links links={mutualLinks}/>
+</Layout>

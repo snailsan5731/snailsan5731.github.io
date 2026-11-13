@@ -1,5 +1,6 @@
 ---
-const { pageTitle } = Astro.props;
+interface props { noContentClass?: boolean };
+const { pageTitle, noContentClass } = Astro.props;
 import "../global.css"
 ---
 
@@ -28,10 +29,14 @@ import "../global.css"
 				<a href="/about">
 					<span class="nav-btn">About</span>
 				</a>
+				<a href="/links">
+					<span class="nav-btn">Links</span>
+				</a>
 			</nav>
 		</header>
 		<main>
-			<slot />
+			{!noContentClass && (<div class="content"><slot /></div>)}
+			{noContentClass && (<slot />)}
 		</main>
 	</body>
 
